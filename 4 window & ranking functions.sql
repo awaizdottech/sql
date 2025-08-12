@@ -8,8 +8,8 @@ select Location,count(Location) as total, avg(Salary) as Avg_Salary from employe
 select FirstName,LastName,employee.Location,total,Avg_Salary from employee 
 join (select Location,count(Location) as total, avg(Salary) as Avg_Salary 
 from employee group by Location) as temp on employee.Location=temp.Location
--- optimising above query via window functions 28
-select FirstName, LastName, Location, count(Location) over(partition by Location) as total,
+-- optimising above query via window functions
+select FirstName, LastName, Location, count(*) over(partition by Location) as total,
 avg(Salary) over(partition by Location) as avg_salary from employee
 
 -- prioritising emplyees based on salary
@@ -31,5 +31,3 @@ as temp on temp.Location=employee.Location where employee.Salary=max_Salary -- m
 select * from (select FirstName, LastName, Salary, Location, 
 row_number() over(partition by Location order by Salary desc) as priority
 from employee) as temp where priority=1
-
--- 1.30

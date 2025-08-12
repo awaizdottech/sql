@@ -16,7 +16,7 @@ select Leaerner_SOJ, count(*) as enrollments_via_SOJ from Learner group by Leaer
 -- course records that doesnt include 'Excel'
 select * from Course where CourseName not like "%Excel%"
 -- learner records with exp>1 & SOJ is youtube
-select * from Learner where Years_of_Expereince>1 and Leaerner_SOJ="Youtube"and Location="Hyd" -- we also use 'or' the same way
+select * from Learner where Years_of_Expereince>1 and Leaerner_SOJ="Youtube" and Location="Hyd" -- we also use 'or' the same way
 -- learners with exp btw 1 & 3
 select * from Learner where Years_of_Expereince between 2 and 4
 

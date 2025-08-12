@@ -13,7 +13,7 @@ DESC Course
 
 insert into Course(CourseName,CourseDuration_Months,CourseFee) values ("The Complete Excel Mastery Course",3,1499);
 insert into Course(CourseName,CourseDuration_Months,CourseFee) values ("DSA for Interview Preperation",2,4999);
-insert into Course(CourseName,CourseDuration_Months,CourseFee) values ("SQL Bootcamp",2,2999);
+insert into Course(CourseName,CourseDuration_Months,CourseFee) values ("SQL Bootcamp",2,2999); -- returning * -- or we could also specify field names to get that in return. it seems the 'returning' also works with update & delete & some packages also get u the data without specifying the return clause
 
 create table Learner(
 	LearnerID int auto_increment primary key,
@@ -29,6 +29,8 @@ create table Learner(
     Batch_Start_Date timestamp not null,
     Location varchar(50) not null,
     foreign key(Selected_Course) references Course(CourseID) -- the key & the reference column should have same data type
+    foreign key(Selected_Course) references Course(CourseID) on delete cascade -- this is mentioned in child tables that references parent table, which triggers deletion of all the children connected data automatically if the row in the parent table gets deleted
+    foreign key(Selected_Course) references Course(CourseID) on delete restrict -- this is also mentioned in child tables which doesnt allow deletion of the parent table record until all the children referencing records are deleted, opp to cascade, is default behavior of foreign key which means this doesnt need to be mentioned 
 )
 
 desc Learner

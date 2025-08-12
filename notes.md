@@ -44,6 +44,7 @@ min
 max
 sum
 avg
+cant be used after where clause directly
 
 select \* from employee order by Salary desc limit 1
 execution flow: from>select>order by>limit
@@ -62,7 +63,7 @@ execution flow: from>where>select>order by>limit
   LIMIT: Limit the number of rows.
 
 group by constraint
-after select whichever non-aggregated(normal column names not count,max,etc) columns we have, they needed to be specified after group by as well
+after select whichever non-aggregated(normal column names, not count,max,etc) columns we have, they needed to be specified after group by as well
 it works by finding the unique values in the non-aggregated columns specified and use the aggregated function on them
 
 select Leaerner_SOJ, count(\*) as enrollments_via_SOJ from Learner group by Leaerner_SOJ
@@ -89,3 +90,5 @@ code flow: subquery()>join>group by>select
 
 UPDATE employee SET LastName="rehan" WHERE EID=2
 here if we give other feild to where for filtering than the primary key, it will show an error of safe mode that can be changed by admin but it is the best practice to use primary key in filters for accurate results
+
+- wrap column names with " to preserve their order, ex "EID"
